@@ -1,5 +1,5 @@
 name: Now Playing e-Ink
-version: "0.1.0"
+version: "0.1.1"
 slug: nowplaying_eink
 description: Renders the song Ofri is playing for a Pico 2 W + 2.13" B/W/R e-paper display
 url: https://github.com/crs2007/spotify_eink_display

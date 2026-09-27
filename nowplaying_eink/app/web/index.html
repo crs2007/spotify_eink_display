@@ -14,10 +14,12 @@
   img { image-rendering:pixelated; max-width:100%; border-radius:6px; box-shadow:0 1px 4px #0003; background:#eee; }
   pre { background:var(--card); padding:10px; border-radius:6px; overflow:auto; font-size:12px; }
   .ok { color:#2a8a3a; } .bad { color:var(--red); }
+  header { display:flex; align-items:center; gap:10px; margin:0 0 12px; } header h1 { margin:0; }
+  #back { font:inherit; font-size:20px; line-height:1; padding:6px 10px; border:0; border-radius:6px; background:var(--card); color:var(--fg); cursor:pointer; box-shadow:0 1px 3px #0002; }
 </style>
 </head>
 <body>
-<h1>Now Playing e-Ink</h1>
+<header><button id="back" type="button" title="Back to Home Assistant" aria-label="Back to Home Assistant">&larr;</button><h1>Now Playing e-Ink</h1></header>
 <div class="frames">
   <figure><img id="pub" alt="Published frame" width="750" height="366"><figcaption>On the panel (published)</figcaption></figure>
   <figure><img id="cand" alt="Candidate frame" width="750" height="366"><figcaption>Candidate (what it would show next)</figcaption></figure>
@@ -41,6 +43,12 @@
       document.getElementById("cand").src = `preview.png?scale=3&candidate=1&t=${t}`;
     } catch (e) { document.getElementById("status").textContent = "Error: " + e; }
   }
+  // Under ingress this page sits in an iframe inside HA (same origin), which has
+  // no header on narrow screens / the companion app. Go back in HA's own history.
+  document.getElementById("back").onclick = () => {
+    const top = window.top;
+    if (top.history.length > 1) top.history.back(); else top.location.href = "/";
+  };
   refresh(); setInterval(refresh, 10000);
 </script>
 </body>
