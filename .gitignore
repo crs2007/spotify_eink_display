@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+out/
+secrets.yaml
+firmware/last_id

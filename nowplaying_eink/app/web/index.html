@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Now Playing e-Ink</title>
+<style>
+  :root { --bg:#f4f3ef; --fg:#1b1b1b; --muted:#6b6b6b; --red:#b92026; --card:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#161616; --fg:#eee; --muted:#9a9a9a; --card:#222; } }
+  body { margin:0; padding:16px; background:var(--bg); color:var(--fg); font:14px/1.45 system-ui, sans-serif; }
+  h1 { font-size:18px; margin:0 0 12px; } h2 { font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:18px 0 6px; }
+  .frames { display:flex; gap:16px; flex-wrap:wrap; }
+  figure { margin:0; } figcaption { color:var(--muted); font-size:12px; margin-top:4px; }
+  img { image-rendering:pixelated; max-width:100%; border-radius:6px; box-shadow:0 1px 4px #0003; background:#eee; }
+  pre { background:var(--card); padding:10px; border-radius:6px; overflow:auto; font-size:12px; }
+  .ok { color:#2a8a3a; } .bad { color:var(--red); }
+</style>
+</head>
+<body>
+<h1>Now Playing e-Ink</h1>
+<div class="frames">
+  <figure><img id="pub" alt="Published frame" width="750" height="366"><figcaption>On the panel (published)</figcaption></figure>
+  <figure><img id="cand" alt="Candidate frame" width="750" height="366"><figcaption>Candidate (what it would show next)</figcaption></figure>
+</div>
+<h2>Status</h2>
+<div id="status">Loading…</div>
+<h2>Raw state</h2>
+<pre id="raw"></pre>
+<script>
+  // Relative URLs so this works behind HA ingress.
+  async function refresh() {
+    try {
+      const r = await fetch("api/v1/state", { cache: "no-store" });
+      const s = await r.json();
+      document.getElementById("raw").textContent = JSON.stringify(s, null, 2);
+      const src = s.source.ok ? `<span class="ok">● ${s.source.name} OK</span>` : `<span class="bad">● ${s.source.name}: ${s.source.message || "waiting"}</span>`;
+      const dev = s.device.seen ? `Pico last seen ${s.device.seen} from ${s.device.ip}` : "Pico hasn't checked in yet";
+      document.getElementById("status").innerHTML = `${src}<br>${dev}<br>Next refresh allowed: ${s.next_refresh_allowed || "now"}`;
+      const t = Date.now();
+      document.getElementById("pub").src = `preview.png?scale=3&t=${t}`;
+      document.getElementById("cand").src = `preview.png?scale=3&candidate=1&t=${t}`;
+    } catch (e) { document.getElementById("status").textContent = "Error: " + e; }
+  }
+  refresh(); setInterval(refresh, 10000);
+</script>
+</body>
+</html>

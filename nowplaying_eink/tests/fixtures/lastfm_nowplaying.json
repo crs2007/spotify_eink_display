@@ -1,0 +1,9 @@
+{"recenttracks": {"track": [
+  {"artist": {"mbid": "", "#text": "The Weeknd"}, "name": "Blinding Lights", "album": {"mbid": "", "#text": "After Hours"},
+   "image": [{"size": "small", "#text": "https://lastfm.freetls.fastly.net/i/u/34s/abc.jpg"},
+             {"size": "medium", "#text": "https://lastfm.freetls.fastly.net/i/u/64s/abc.jpg"},
+             {"size": "large", "#text": "https://lastfm.freetls.fastly.net/i/u/174s/abc.jpg"},
+             {"size": "extralarge", "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/abc.jpg"}],
+   "@attr": {"nowplaying": "true"}, "url": "https://www.last.fm/music/The+Weeknd/_/Blinding+Lights"},
+  {"artist": {"#text": "Queen"}, "name": "Old Song", "album": {"#text": "Jazz"}, "image": [], "date": {"uts": "1758800000"}}
+], "@attr": {"user": "ofri", "totalPages": "100", "page": "1", "perPage": "1", "total": "100"}}}

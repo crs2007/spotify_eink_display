@@ -1,0 +1,3 @@
+aiohttp>=3.9,<4
+pillow>=10.3
+python-bidi==0.4.2  # pure Python: no Rust toolchain needed on Alpine

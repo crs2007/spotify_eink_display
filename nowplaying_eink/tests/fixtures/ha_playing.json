@@ -1,0 +1,4 @@
+{"entity_id": "media_player.spotify_ofri", "state": "playing",
+ "attributes": {"media_title": "Don't Stop Me Now - Remastered 2011", "media_artist": "Queen", "media_album_name": "Jazz (2011 Remaster)",
+   "entity_picture": "/api/media_player_proxy/media_player.spotify_ofri?token=abc&cache=def", "friendly_name": "Spotify Ofri",
+   "source": "Ofri's iPhone", "shuffle": false}}

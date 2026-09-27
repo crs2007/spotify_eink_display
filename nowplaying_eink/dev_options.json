@@ -1,0 +1,8 @@
+{
+  "source": "ha_entity",
+  "entity_id": "media_player.spotify_ofri_rimer",
+  "ha_url": "http://192.168.68.166:8123",
+  "data_dir": "../out/dev_data",
+  "host": "0.0.0.0",
+  "port": 18099
+}

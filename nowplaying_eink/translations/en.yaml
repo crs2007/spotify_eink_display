@@ -1,0 +1,43 @@
+configuration:
+  source:
+    name: Song source
+    description: "lastfm = no Spotify Premium needed (link Spotify to Last.fm). ha_entity = a Home Assistant media_player (e.g. the Spotify integration)."
+  lastfm_user:
+    name: Last.fm username
+  lastfm_api_key:
+    name: Last.fm API key
+    description: Create one at https://www.last.fm/api/account/create
+  entity_id:
+    name: Media player entity
+    description: For source ha_entity, e.g. media_player.spotify_ofri_rimer
+  owner_name:
+    name: Name in the footer
+  device_token:
+    name: Device token
+    description: Long random secret. Put the same value in secrets.yaml (device_token) for the Pico.
+  min_refresh_s:
+    name: Minimum seconds between refreshes
+    description: Waveshare recommends at least 180 for tri-color panels.
+  settle_s:
+    name: Settle time (s)
+    description: A new song must be stable this long before it is shown (avoids flashing while skipping).
+  pause_grace_s:
+    name: Pause grace (s)
+  idle_after_min:
+    name: Idle after (minutes)
+  quiet_hours:
+    name: Quiet hours
+    description: "No refreshes in this window, e.g. 00:30-07:00. Empty = off."
+  art_palette:
+    name: Cover colours
+    description: "auto = use red ink only for covers that are clearly red; bw; bwr."
+  clean_titles:
+    name: Clean titles
+    description: Strip "- Remastered 2011", "- Radio Edit" and similar.
+  rotate:
+    name: Rotation
+    description: 90 or 270, depending on which side the cable exits. Must match the Pico's ROTATE.
+  poll_s:
+    name: Pico poll interval (s)
+network:
+  8099/tcp: Frame endpoint for the Pico

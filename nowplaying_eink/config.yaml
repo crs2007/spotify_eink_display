@@ -1,0 +1,50 @@
+name: Now Playing e-Ink
+version: "0.1.0"
+slug: nowplaying_eink
+description: Renders the song Ofri is playing for a Pico 2 W + 2.13" B/W/R e-paper display
+url: https://github.com/crs2007/spotify_eink_display
+arch:
+  - aarch64
+  - amd64
+init: false
+homeassistant_api: true
+ingress: true
+ingress_port: 8099
+panel_icon: mdi:music-box
+panel_title: e-Ink
+ports:
+  8099/tcp: 8099
+ports_description:
+  8099/tcp: Frame endpoint for the Pico (keep open on your LAN)
+options:
+  source: ha_entity
+  lastfm_user: ""
+  lastfm_api_key: ""
+  entity_id: media_player.spotify_ofri_rimer
+  owner_name: Ofri
+  device_token: ""
+  min_refresh_s: 180
+  settle_s: 20
+  pause_grace_s: 120
+  idle_after_min: 15
+  quiet_hours: ""
+  art_palette: auto
+  clean_titles: true
+  rotate: 90
+  poll_s: 15
+schema:
+  source: list(lastfm|ha_entity)
+  lastfm_user: str?
+  lastfm_api_key: password?
+  entity_id: str?
+  owner_name: str
+  device_token: password
+  min_refresh_s: int(60,3600)
+  settle_s: int(0,300)
+  pause_grace_s: int(0,3600)
+  idle_after_min: int(1,1440)
+  quiet_hours: match(^(\d{1,2}:\d{2}-\d{1,2}:\d{2})?$)?
+  art_palette: list(auto|bw|bwr)
+  clean_titles: bool
+  rotate: list(90|270)
+  poll_s: int(5,300)
